@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>robux取引専用計算機</title>
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --background-color: #f4f4f4;
+      --text-color: #333;
+      --border-radius: 10px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--background-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.2rem;
+      border: 2px solid #ddd;
+      border-radius: var(--border-radius);
+      box-sizing: border-box;
+      margin-bottom: 1rem;
+      transition: border 0.2s;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--text-color);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>受け取り先が手に入れたい金額を入力してください</h1>
+    <input type="number" id="inputNumber" placeholder="数字を入力" />
+    <button onclick="calculate()">計算する</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const input = document.getElementById("inputNumber").value;
+      const number = parseFloat(input);
+
+      if (isNaN(number)) {
+        document.getElementById("result").textContent = "正しい数字を入力してください。";
+        return;
+      }
+
+      const result = Math.ceil(number * 10 / 7);
+      document.getElementById("result").textContent = `結果: ${result}`;
+    }
+  </script>
+</body>
+</html>
