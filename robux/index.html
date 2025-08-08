@@ -77,6 +77,11 @@
       color: var(--text-color);
     }
 
+    .mode-select {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
     @media (max-width: 480px) {
       h1 {
         font-size: 1.3rem;
@@ -85,26 +90,46 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>受け取り先が手に入れたい金額を入力してください</h1>
-    <input type="number" id="inputNumber" placeholder="数字を入力" />
-    <button onclick="calculate()">計算する</button>
-    <div id="result"></div>
+<div class="container">
+  <h1>金額を入力してください</h1>
+
+  <div class="mode-select">
+    <label>
+      <input type="radio" name="mode" value="up" checked>
+      販売者側の取得金で計算する
+    </label><br>
+    <label>
+      <input type="radio" name="mode" value="down">
+      購入者側の支払金で計算する
+    </label>
   </div>
 
-  <script>
-    function calculate() {
-      const input = document.getElementById("inputNumber").value;
-      const number = parseFloat(input);
+  <input type="number" id="inputNumber" placeholder="数字を入力" />
+  <button onclick="calculate()">計算する</button>
+  <div id="result"></div>
+</div>
 
-      if (isNaN(number)) {
-        document.getElementById("result").textContent = "正しい数字を入力してください。";
-        return;
-      }
+<script>
+  function calculate() {
+    const input = document.getElementById("inputNumber").value;
+    const number = parseFloat(input);
 
-      const result = Math.ceil(number * 10 / 7);
-      document.getElementById("result").textContent = `結果: ${result}`;
+    if (isNaN(number)) {
+      document.getElementById("result").textContent = "正しい数字を入力してください。";
+      return;
     }
-  </script>
+
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    let result;
+
+    if (mode === "up") {
+      result = Math.ceil(number * 10 / 7);
+    } else {
+      result = Math.floor(number * 7 / 10);
+    }
+
+    document.getElementById("result").textContent = `結果: ${result}`;
+  }
+</script>
 </body>
 </html>
